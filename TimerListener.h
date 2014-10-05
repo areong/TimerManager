@@ -5,13 +5,13 @@ class Timer;
 
 class TimerListener {
 public:
-	TimerListener();
-	~TimerListener();
-	void setTimer(Timer *timer);
-	void stopTimer();
+    TimerListener();
+    ~TimerListener();
+    void setTimer(Timer *timer);
+    void stopTimer();
     virtual void onTimerCall() = 0;
 private:
-	Timer *timer;
+    Timer *timer;
 };
 
 #endif
