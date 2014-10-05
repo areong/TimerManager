@@ -2,7 +2,7 @@
 
 ## Run as many timers as you want
 
-On Teensy, at most three `IntervalTimer`s can be active at one time. `TimerManager`, which benefits from `IntervalTimer`, enables you to run as many timers as you want simultaneously. Moreover, you can also set any class's member function as a callback function, as long as the class implements the `TimerListener` interface.
+On Teensy, at most three `IntervalTimer`s can be active at one time. `TimerManager`, which benefits from `IntervalTimer`, enables you to run as many timers as you want simultaneously. Moreover, you can also set any class's member function as a callback function, as long as the class inherits from the `TimerListener` class.
 
 ### Example
 
