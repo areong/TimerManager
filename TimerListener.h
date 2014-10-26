@@ -5,13 +5,20 @@ class Timer;
 
 class TimerListener {
 public:
-    TimerListener();
-    ~TimerListener();
-    void setTimer(Timer *timer);
-    void stopTimer();
+	TimerListener();
+	~TimerListener();
+	void setTimer(Timer *timer);
+	void pauseTimer();
+	void resumeTimer();
+	void stopTimer();
     virtual void onTimerCall() = 0;
+    /*
+    Called when Timer.stop() is called.
+    It is not purely virtual so subclass can choose to override it or not.
+    */
+    virtual void onTimerStopped() {}
 private:
-    Timer *timer;
+	Timer *timer;
 };
 
 #endif

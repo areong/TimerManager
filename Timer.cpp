@@ -15,9 +15,11 @@ Timer::Timer(int resolution, double period, int numPeriods, TimerListener *liste
     countTicks = 0;
     countPeriods = 0;
     paused = false;
+    stopped = false;
     nonStop = (numPeriods <= 0 ? true : false);
     this->listener = listener;
-    listener->setTimer(this);
+    if (listener != 0)  // User might input a null pointer.
+        listener->setTimer(this);
 }
 
 Timer::~Timer() {
@@ -30,7 +32,8 @@ void Timer::tick() {
     countTicks++;
     if (countTicks >= periodInTicks) {
         countPeriods++;
-        listener->onTimerCall();
+        if (listener != 0)  // Listener is null if it is deleted.
+            listener->onTimerCall();
         if (!nonStop && countPeriods >= numPeriods)
             stop();
         countTicks = 0;
@@ -46,8 +49,14 @@ void Timer::resume() {
 }
 
 void Timer::stop() {
+    if (stopped)    // Cannot stop again if Timer.stop() has been called before.
+        return;
+
     paused = true;
+    stopped = true;
     TimerManager::getInstance()->addStoppedTimer(this);
+    if (listener != 0)  // Listener is null if it is deleted.
+        listener->onTimerStopped();
 }
 
 void Timer::setResolution(int resolution) {

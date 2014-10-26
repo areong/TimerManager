@@ -37,6 +37,10 @@ private:
     True if the timer pauses.
     */
     bool paused;
+    /*
+    True if Timer.stop() has been called.
+    */
+    bool stopped;
     bool nonStop;
     TimerListener *listener;
 };
