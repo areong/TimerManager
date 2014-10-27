@@ -136,7 +136,7 @@ void TimerManager::beginIntervalTimer(int ithRes) {
 
 void TimerManager::deleteStoppedTimers() {
     if (stoppedTimers->getLength() > 0) {
-        for (int i = stoppedTimers->getLength() - 1; i >= 0 ; i++) {
+        for (int i = stoppedTimers->getLength() - 1; i >= 0 ; i--) {
             // Iterate stoppedTimers from the last,
             // because the order of Timers in stoppedTimers
             // is the same in Timers lists and removing from
