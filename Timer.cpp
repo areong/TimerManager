@@ -31,12 +31,18 @@ void Timer::tick() {
 
     countTicks++;
     if (countTicks >= periodInTicks) {
-        countPeriods++;
+        // Complete a period.
         if (listener != 0)  // Listener is null if it is deleted.
             listener->onTimerCall();
-        if (!nonStop && countPeriods >= numPeriods)
-            stop();
         countTicks = 0;
+
+        // If nonstop, no need to count periods,
+        // or countPeriods will grow too large.
+        if (!nonStop) {
+            countPeriods++;
+            if (countPeriods >= numPeriods)
+                stop();
+        }
     }
 }
 
